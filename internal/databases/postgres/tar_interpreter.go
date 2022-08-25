@@ -131,7 +131,7 @@ func (tarInterpreter *FileTarInterpreter) Interpret(fileReader io.Reader, fileIn
 		} else if fi.Mode()&fs.ModeSymlink != 0 {
 			// target exists and is symlink. Replace (remove before create)
 			if err = os.Remove(targetPath); err == nil {
-				tracelog.DebugLogger.Println("Symlink already existed. Removed so we can replace.", targetPath)
+				tracelog.DebugLogger.Printf("Interpret: symlink %s already existed. Removed so we can replace.", targetPath)
 			} else if err != os.ErrNotExist {
 				return fmt.Errorf("symlink %s already exists, and could not be removed", targetPath)
 			}
