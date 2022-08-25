@@ -125,7 +125,7 @@ func (tarInterpreter *FileTarInterpreter) Interpret(fileReader io.Reader, fileIn
 		// Therefore, we check symlinks in the tar file to see if the already exist and already are symlinks in the
 		// restore in which case we replace it (remove before creation).
 		if fi, err := os.Lstat(targetPath); os.IsNotExist(err) {
-			tracelog.DebugLogger.Printf("%s does not yet exist", targetPath)
+			tracelog.DebugLogger.Printf("Interpret: %s does not yet exist", targetPath)
 		} else if err != nil {
 			tracelog.ErrorLogger.Printf("failed to stat %s: %s", targetPath, err.Error())
 			return err
