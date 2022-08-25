@@ -127,8 +127,7 @@ func (tarInterpreter *FileTarInterpreter) Interpret(fileReader io.Reader, fileIn
 		if fi, err := os.Lstat(targetPath); os.IsNotExist(err) {
 			tracelog.DebugLogger.Printf("Interpret: %s does not yet exist", targetPath)
 		} else if err != nil {
-			tracelog.ErrorLogger.Printf("failed to stat %s: %s", targetPath, err.Error())
-			return err
+			return fmt.Errorf("Interpret: failed to stat %s: %w", targetPath, err)
 		} else if fi.Mode()&fs.ModeSymlink != 0 {
 			// target exists and is symlink. Replace (remove before create)
 			if err = os.Remove(targetPath); err == nil {
