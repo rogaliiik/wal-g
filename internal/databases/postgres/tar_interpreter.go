@@ -138,7 +138,7 @@ func (tarInterpreter *FileTarInterpreter) Interpret(fileReader io.Reader, fileIn
 		} else {
 			// if is exists and is no symlink we could remove data
 			// this probably is coming from an earlier tar from this restore, but let's not take any chances
-			return fmt.Errorf("%s exists and is no symlink", targetPath)
+			return fmt.Errorf("Interpret: %s exists and is no symlink", targetPath)
 		}
 		if err := os.Symlink(fileInfo.Name, targetPath); err != nil {
 			return errors.Wrapf(err, "Interpret: failed to create symlink %s", targetPath)
